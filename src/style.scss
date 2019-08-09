@@ -1,0 +1,101 @@
+html, body, #root, main{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: monospace;
+}
+
+main{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+section.player-card{
+  background-color: lightgrey;
+  padding: 30px;
+  min-width: 200px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  &:first-child{
+    transform-origin: 130% 50%;
+  }
+  &:last-child{
+    transform-origin: -30% 50%;
+  }
+
+
+  &.lose{
+    background-color: rgba(255,0,0,0.2);
+    animation: playerLost 3s ease;
+  }
+  &.win{
+    background-color: rgba(0,255,0,0.2);
+  }
+
+
+  h2{
+    margin: 0;
+  }
+
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input{
+    display: none;
+  }
+
+
+  input + span,
+  &.computer.chosen label span,
+  &.computer.choosing label span {
+    transition: all 0.5s;
+    font-size: 1em;
+   }
+
+  input:checked + span {
+    font-size: 2em;
+  }
+
+  &.win input:checked + span,
+  &.lose input:checked + span,
+  &.draw input:checked + span {
+    font-weight: bold;
+  }
+
+  label{
+    display: block;
+    text-transform: capitalize;
+  }
+
+  p.choice-box{
+    text-transform: capitalize;
+  }
+
+}
+
+@media screen and (max-width: 650px) {
+  main { flex-flow: column; }
+  section.player-card {
+    &:first-child { transform-origin: 50% 130%; }
+    &:last-child  { transform-origin: 50% -30%; }
+  }
+}
+
+
+@keyframes playerLost {
+  70%{
+    transform: scale(1);
+  }
+  100%{
+    transform: scale(0.01);
+  }
+}
